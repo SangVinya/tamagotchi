@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<h1>Scooby-Doo</h1>
+<% if (health || satiety || happiness || purity) < 1 %>
+<img src='https://cdn.drawception.com/images/panels/2016/9-29/BeqtyOmXS6-4.png
+' width = 20%>
+<% else %>
+<img src='https://www.turner.com/s3fs-public/image_u/img_scrappy_2.JPG' width=20%>
+<% end %>
+<p>Health: <%= health %></p>
+<p>Satiety: <%= satiety %></p>
+<p>Happiness: <%= happiness %></p>
+<p>Purity: <%= purity %></p>
+<div>
+    <form method="put" action = "">
+        <button type="submit" class="btn btn-success">CHECK</button>
+    </form>
+    <form method="put" action = "">
+        <button type="submit" class="btn btn-danger">FEED</button>
+    </form>
+    <form method="put" action = "">
+        <button type="submit" class="btn btn-warning">WALK</button>
+    </form>
+    <form method="put" action = "">
+        <button type="submit" class="btn btn-primary">WASH</button>
+    </form>
+</div>
