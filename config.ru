@@ -1,4 +1,5 @@
-require './pet_controller.rb'
+require './render.rb'
 
-use Rack::Reloader
-run PetController.new(5,5,5,5)
+use Rack::Reloader, 0
+
+run Render.new(5,5,5,5)
