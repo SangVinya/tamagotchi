@@ -1,4 +1,6 @@
-require './pet_controller.rb'
+require './pet.rb'
 
-use Rack::Reloader
-run PetController.new(5,5,5,5)
+use Rack::Reloader, 0
+use Rack::Static, :urls => ["/public"]
+
+run Pet

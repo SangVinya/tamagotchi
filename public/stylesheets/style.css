@@ -1,0 +1,16 @@
+.main {
+  text-align: center;
+}
+.main .headline {
+  font-weight: 1000;
+}
+.font {
+  font-size: 22px;
+}
+.form {
+  margin: 0 auto;
+  width: 40%;
+}
+.change {
+  margin-left: 10px;
+}

@@ -1,0 +1,38 @@
+<head>
+  <title>Tamagotchi</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="/public/stylesheets/style.css" rel="stylesheet">
+</head>
+<div class="container main">
+  <br>
+  <form class="form row" method="post" action="/change">
+    <input class="form-control col-8" type="text" name="name" placeholder="Pet's name">
+    <button type="submit" class="btn btn-primary change">Change name</button>
+  </form>
+  <br>
+  <h1><%= set_name %></h1>
+  <img src='https://www.turner.com/s3fs-public/image_u/img_scrappy_2.JPG' width=50%>
+  <div class="row font">
+    <p class="col-2">Health: <%= get("health") %></p>
+    <p class="col-2">Satiety: <%= get("satiety") %></p>
+    <p class="col-2">Happiness: <%= get("happiness") %></p>
+    <p class="col-2">Purity: <%= get("purity") %></p>
+  </div>
+  <div class="row">
+    <form class="col-2" method="post" action="/check">
+      <button type="submit" name="check" class="btn btn-success">CHECK</button>
+    </form>
+    <form class="col-2" method="post" action="/feed">
+      <button type="submit" name="feed" class="btn btn-dark">FEED</button>
+    </form>
+    <form class="col-2" method="post" action="/walk">
+      <button type="submit" name="walk" class="btn btn-secondary">WALK</button>
+    </form>
+    <form class="col-2" method="post" action="/wash">
+      <button type="submit" name="wash" class="btn btn-info">WASH</button>
+    </form>
+    <form class="col-4" method="post" action="/restart">
+      <button type="submit" name="restart" class="btn btn-danger">Restart</button>
+    </form>
+  </div>
+</div>
