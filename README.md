@@ -1,3 +1,3 @@
-# TestSuite
+# Tamagotchi
 
 Keep your pet alive)
