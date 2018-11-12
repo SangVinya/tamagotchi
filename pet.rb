@@ -13,11 +13,9 @@ class Pet
     case @request.path
     when "/"
       Rack::Response.new do |response|
-        response.set_cookie("name", "Pet")
-        response.set_cookie("health", 5)
-        response.set_cookie("satiety", 5)
-        response.set_cookie("happiness", 5)
-        response.set_cookie("purity", 5)
+        response.set_cookie("name", set_name)
+        values = ["health", "satiety", "happiness", "purity"]
+        values.each { |value| response.set_cookie(value, 5) }
         response.redirect("/game")
       end
     when "/game"
@@ -32,37 +30,13 @@ class Pet
         response.redirect("/game")
       end
     when "/check"
-      Rack::Response.new do |response|
-        response.set_cookie("health", set(get("health")))
-        response.set_cookie("happiness", decrease(get("happiness")))
-        response.redirect("/game")
-      end
+      build_response("health", "happiness")
     when "/feed"
-      Rack::Response.new do |response|
-        response.set_cookie("satiety", set(get("satiety")))
-        response.set_cookie("purity", decrease(get("purity")))
-        response.redirect("/game")
-      end
+      build_response("satiety", "purity")
     when "/walk"
-      Rack::Response.new do |response|
-        response.set_cookie("happiness", set(get("happiness")))
-        response.set_cookie("health", decrease(get("health")))
-        response.redirect("/game")
-      end
+      build_response("happiness", "health")
     when "/wash"
-      Rack::Response.new do |response|
-        response.set_cookie("purity", set(get("purity")))
-        response.set_cookie("satiety", decrease(get("satiety")))
-        response.redirect("/game")
-      end
-    when "/restart"
-      Rack::Response.new do |response|
-        response.set_cookie("health", 5)
-        response.set_cookie("satiety", 5)
-        response.set_cookie("happiness", 5)
-        response.set_cookie("purity", 5)
-        response.redirect("/game")
-      end
+      build_response("purity", "satiety")
     else
       Rack::Response.new("Not found", 404)
     end
@@ -73,16 +47,24 @@ class Pet
     ERB.new(File.read(path)).result(binding)
   end
 
+  def build_response(value_for_increase, value_for_decrease)
+    Rack::Response.new do |response|
+      response.set_cookie("#{value_for_increase}", increase(get("#{value_for_increase}")))
+      response.set_cookie("#{value_for_decrease}", decrease(get("#{value_for_decrease}")))
+      response.redirect("/game")
+    end
+  end
+
   def set_name
-    name = @request.cookies["name"].delete(" ")
-    if name.empty?
-      "Pet"
+    name = @request.cookies["name"]
+    if name.nil? || name.empty?
+      name = "Pet"
     else
       name
     end
   end
 
-  def set(value)
+  def increase(value)
     (0...10).include?(value) ? value += 1 : value
   end
 
